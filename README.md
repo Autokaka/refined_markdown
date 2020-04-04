@@ -1,14 +1,109 @@
-# refined_markdown
+## What is it?
 
-A new Flutter package project.
+A simple Markdown renderer that is written mostly in dart (grammar analysing and rendering part).
 
-## Getting Started
+## How to use it?
 
-This project is a starting point for a Dart
-[package](https://flutter.dev/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
+Using RefinedMarkdown is simple. What you need to do is generally like this:
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+```dart
+// main.dart
+import 'package:flutter/material.dart';
+// import 'package:flutter/rendering.dart';
+import 'package:refined_markdown/refined_markdown.dart';
+
+void main() {
+  // debugPaintSizeEnabled = true;
+  runApp(MyApp());
+}
+
+class MyApp extends StatefulWidget {
+  MyApp({Key key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: MarkdownPage(),
+    );
+  }
+}
+
+class MarkdownPage extends StatefulWidget {
+  @override
+  _MarkdownPageState createState() => _MarkdownPageState();
+}
+
+class _MarkdownPageState extends State<MarkdownPage> {
+  String filePath = 'assets/markdown.html';
+
+  @override
+  Widget build(BuildContext context) {
+    CSS baseCSS = CSS();
+    baseCSS.fontSize = 13;
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        title: Text('Markdown测试'),
+      ),
+      body: RefinedMarkdown(
+        text: r"""
+        Contents that are written in Markdown format
+				""",
+        css: baseCSS,
+      ),
+    );
+  }
+}
+```
+
+**<font color="red">The key part of the code above is:</font>**
+
+```dart
+@override
+  Widget build(BuildContext context) {
+    CSS baseCSS = CSS();
+    baseCSS.fontSize = 13;
+    return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        title: Text('Markdown测试'),
+      ),
+      body: RefinedMarkdown(
+        text: r"""
+        Contents that are written in Markdown format
+        """,
+        css: baseCSS,
+      ),
+    );
+  }
+```
+
+
+
+## What are the meanings of those params?
+
+### RefinedMarkdown
+
+| param | type   | explanation                                                  | is required |
+| ----- | ------ | ------------------------------------------------------------ | ----------- |
+| text  | String | The <font color="blue">raw</font> text of a markdown string, please notice that. | yes         |
+| css   | CSS    | The cascading style sheet (in concept) that helps you <font color="blue">build the basic style</font> of your markdown texts to be rendered. In detail, The rendered text style like the style of “## header2” will be rendered on the basis of the basic style (baseCSS in code demo above). | yes         |
+
+### CSS
+
+| param           | type  | default value      | explanation                                   | is required |
+| --------------- | ----- | ------------------ | --------------------------------------------- | ----------- |
+| fontSize        | int   | 11                 | The size of the text                          | no          |
+| fontColor       | Color | Colors.black87     | The color of the text                         | no          |
+| backgroundColor | Color | Colors.transparent | The color of the background of **each** text  | no          |
+| isItalic        | bool  | false              | Whether the text is displayed in bold style   | no          |
+| isBold          | bool  | false              | Whether the text is displayed in italic style | no          |
+| deleted         | bool  | false              | Whether the text is shown with line-through   | no          |
+| underline       | bool  | false              | Whether to show an underline                  | no          |
+
