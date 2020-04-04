@@ -1,3 +1,11 @@
+## 1.0.0+2
+
+Really sorry, update README again! I am an obsessive. QAQ
+
+## 1.0.0
+
+Nothing changed, just update README, and prove that this package is not an early version.
+
 ## 0.0.1
 
 First commit.
@@ -10,7 +18,7 @@ Now support rendering the following grammar. Some of them may not work as you wi
 
 - **bold text**
 
-- *Italic text*
+- _Italic text_
 
 - <font color="orange">Syntax highlight</font>
 
@@ -26,7 +34,7 @@ Now support rendering the following grammar. Some of them may not work as you wi
 
 - [links](https://www.baidu.com)
 
-- photos![photos](http://via.placeholder.com/150x150)(Using extended_text. Thanks to team [fluttercandies](https://github.com/fluttercandies).)
+- photos![photos](https://via.placeholder.com/150x150)(Using extended_text. Thanks to team [fluttercandies](https://github.com/fluttercandies).)
 
 1. sequence list
 
@@ -37,4 +45,3 @@ Now support rendering the following grammar. Some of them may not work as you wi
 1. Just optimize the functions that has been built as much as I can.
 2. Add some html support that are frequently used.
 3. Support table rendering.
-
