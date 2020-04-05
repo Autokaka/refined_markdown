@@ -1,6 +1,6 @@
 name: refined_markdown
 description: A simple Markdown renderer that is written mostly in dart (grammar analysing and rendering part). Simple, quiet, fast, that is all refined markdown is intended to be.
-version: 1.0.0+4
+version: 1.0.0+5
 author: Autokaka<qq1909698494@gmail.com>
 homepage: https://github.com/Autokaka/refined_markdown
 

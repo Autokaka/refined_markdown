@@ -1,3 +1,7 @@
+# Refined Markdown
+
+[![pub-mirror-cn](https://img.shields.io/badge/dynamic/json?color=blue&label=pub-mirror-cn&query=latestStableVersion&url=https%3A%2F%2Fdart-pub.mirrors.sjtug.sjtu.edu.cn%2Fapi%2Fdocumentation%2Frefined_markdown)](https://dart-pub.mirrors.sjtug.sjtu.edu.cn/packages/refined_markdown)[![pub](https://img.shields.io/badge/dynamic/json?color=blue&label=pub&query=latestStableVersion&url=https%3A%2F%2Fpub.dartlang.org%2Fapi%2Fdocumentation%2Frefined_markdown)](https://pub.dartlang.org/packages/refined_markdown)
+
 ## What is it?
 
 A simple Markdown renderer that is written mostly in dart (grammar analysing and rendering part).
@@ -84,15 +88,13 @@ class _MarkdownPageState extends State<MarkdownPage> {
   }
 ```
 
-
-
 ## What are the meanings of those params?
 
 ### RefinedMarkdown
 
-| param | type   | explanation                                                  | is required |
-| ----- | ------ | ------------------------------------------------------------ | ----------- |
-| text  | String | The **raw** text of a markdown string, please notice that.   | yes         |
+| param | type   | explanation                                                                                                                                                                                                                                                             | is required |
+| ----- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| text  | String | The **raw** text of a markdown string, please notice that.                                                                                                                                                                                                              | yes         |
 | css   | CSS    | The cascading style sheet (in concept) that helps you **build the basic style** of your markdown texts to be rendered. In detail, The rendered text style like the style of “## header2” will be rendered on the basis of the basic style (baseCSS in code demo above). | yes         |
 
 ### CSS
@@ -106,4 +108,3 @@ class _MarkdownPageState extends State<MarkdownPage> {
 | isBold          | bool  | false              | Whether the text is displayed in italic style | no          |
 | deleted         | bool  | false              | Whether the text is shown with line-through   | no          |
 | underline       | bool  | false              | Whether to show an underline                  | no          |
-

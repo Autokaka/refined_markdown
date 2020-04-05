@@ -1,3 +1,7 @@
+## 1.0.0+5
+
+Upload version badge in README for convenience. =w=
+
 ## 1.0.0+4
 
 ### Fix
