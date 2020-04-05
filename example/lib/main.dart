@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 // import 'package:flutter/rendering.dart';
-import 'package:refined_markdown/refined_markdown.dart';
+
+/// If you want to use refined_markdown, please add description in pubspec.yaml
+/// and import the package like this:
+///
+/// import 'package:refined_markdown/refined_markdown.dart';
+///
+import './refined_markdown.dart';
 
 void main() {
   // debugPaintSizeEnabled = true;
@@ -30,8 +36,6 @@ class MarkdownPage extends StatefulWidget {
 }
 
 class _MarkdownPageState extends State<MarkdownPage> {
-  String filePath = 'assets/markdown.html';
-
   @override
   Widget build(BuildContext context) {
     CSS baseCSS = CSS();
@@ -157,13 +161,9 @@ string_3: bar
 [百度](https://www.baidu.com)普通文字
   ##### **[百度加粗](https://www.baidu.com)**
       [**百度加粗(链接解析失效)**](https://www.baidu.com)
+- [链接](https://www.baidu.com)普通文字
 
 右侧图片![图片](http://via.placeholder.com/350x150)
-
-
-
-
-
 
 """,
         css: baseCSS,

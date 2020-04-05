@@ -1,3 +1,20 @@
+## 1.0.0+4
+
+### Fix
+
+1. Symbol displaying of normal list
+2. “\n” ignored in links at the beginningof a new line
+3. Links failed to render when a list is formerly declared
+
+### Optimize
+
+1. All lists rendering logic
+2. All links rendering logic
+
+### Notice
+
+If there are still displaying problems, please feel free to give an Issue or a PR, I’ll handle them as quickly as I can, thank you.
+
 ## 1.0.0+3
 
 You know what, the displaying of readme looks weird. QAQ
