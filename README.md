@@ -1,6 +1,6 @@
 # Refined Markdown
 
-[![pub-mirror-cn](https://img.shields.io/badge/dynamic/json?color=blue&label=pub-mirror-cn&query=latestStableVersion&url=https%3A%2F%2Fdart-pub.mirrors.sjtug.sjtu.edu.cn%2Fapi%2Fdocumentation%2Frefined_markdown)](https://dart-pub.mirrors.sjtug.sjtu.edu.cn/packages/refined_markdown)[![pub](https://img.shields.io/badge/dynamic/json?color=blue&label=pub&query=latestStableVersion&url=https%3A%2F%2Fpub.dartlang.org%2Fapi%2Fdocumentation%2Frefined_markdown)](https://pub.dartlang.org/packages/refined_markdown)
+[![pub-mirror-cn](https://img.shields.io/badge/dynamic/json?color=blue&label=pub-mirror-cn&query=latestStableVersion&url=https%3A%2F%2Fdart-pub.mirrors.sjtug.sjtu.edu.cn%2Fapi%2Fdocumentation%2Frefined_markdown)](https://dart-pub.mirrors.sjtug.sjtu.edu.cn/packages/refined_markdown) [![pub](https://img.shields.io/badge/dynamic/json?color=blue&label=pub&query=latestStableVersion&url=https%3A%2F%2Fpub.dartlang.org%2Fapi%2Fdocumentation%2Frefined_markdown)](https://pub.dartlang.org/packages/refined_markdown)
 
 ## What is it?
 

@@ -132,8 +132,6 @@ string_3: bar
   ##### **[百度加粗](https://www.baidu.com)**
       [**百度加粗(链接解析失效)**](https://www.baidu.com)
 
-右侧图片![图片](http://via.placeholder.com/350x150)
-
 """,
                   css: baseCSS,
                 ),
