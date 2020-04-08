@@ -6,6 +6,14 @@
 
 A simple Markdown renderer that is written mostly in dart (grammar analysing and rendering part).
 
+## Demo preview
+
+![demo1](https://raw.githubusercontent.com/Autokaka/refined_markdown/master/assets/demo1.jpg)
+![demo2](https://raw.githubusercontent.com/Autokaka/refined_markdown/master/assets/demo2.jpg)
+![demo3](https://raw.githubusercontent.com/Autokaka/refined_markdown/master/assets/demo3.jpg)
+![demo4](https://raw.githubusercontent.com/Autokaka/refined_markdown/master/assets/demo4.jpg)
+![demo5](https://raw.githubusercontent.com/Autokaka/refined_markdown/master/assets/demo5.jpg)
+
 ## How to use it?
 
 Using RefinedMarkdown is simple. What you need to do is generally like this:
