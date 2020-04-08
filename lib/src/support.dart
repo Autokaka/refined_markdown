@@ -5,8 +5,6 @@ import './css.dart';
 import './renderer.dart';
 
 /// 解析支持表, 支持渐进式开发. 当需要渲染新的Markdown标记时, 只需要实现基于Renderer的渲染类即可
-/// 需要注意的是, Markdown语法有着较为严格的"优先级", 所以本表的顺序也是渲染顺序, 如果您不了解
-/// Markdown的渲染顺序, 请查阅资料或自行测试后再在适当位置添加额外渲染支持
 final Map<String, dynamic> supports = {
   // YAML
   r"\n *-{3} *\n[\s\S]*?\n *-{3} *":
