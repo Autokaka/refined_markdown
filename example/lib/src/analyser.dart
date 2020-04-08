@@ -14,12 +14,21 @@ class Analyser {
   });
 
   InlineSpan parseTextSpan(BuildContext context) {
+    int start = text.length;
+    int end = 0;
+    String finPtrn;
     for (var pattern in supports.keys) {
       RegExp regExp = RegExp(pattern);
       var firstMatch = regExp.firstMatch(text);
       if (firstMatch == null) continue;
-      return supports[pattern](
-          text, firstMatch.start, firstMatch.end, css, context);
+      if (firstMatch.start < start) {
+        start = firstMatch.start;
+        end = firstMatch.end;
+        finPtrn = pattern;
+      }
+    }
+    if (finPtrn != null) {
+      return supports[finPtrn](text, start, end, css, context);
     }
 
     return (inheritedWidgetBuilder != null)

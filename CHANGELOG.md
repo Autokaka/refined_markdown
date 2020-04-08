@@ -1,3 +1,17 @@
+## 1.1.0
+
+### Optimize
+
+All rendering logic, now the rendering order no longer relies on the so-called “priorities”.
+
+### Fix
+
+1. “\n” rendering when input contains "\n\n”
+2. Link rendering failed when bold text format “\*\*” is in “[]”
+3. Bold and italic rendering fault when enrolled in normal words
+4. Code segment rendering fault when it is empty
+5. More minor bug fixes.
+
 ## 1.0.0+6
 
 [Add] Basic travis CI support.

@@ -353,51 +353,6 @@ class ItalicText extends Renderer {
   }
 }
 
-class BoldItalicText extends Renderer {
-  final String src;
-  final int start;
-  final int end;
-  final CSS css;
-
-  const BoldItalicText({
-    Key key,
-    @required this.src,
-    @required this.start,
-    @required this.end,
-    @required this.css,
-  }) : super(src: src, start: start, end: end, css: css);
-
-  @override
-  InlineSpan build(BuildContext context) {
-    // 假设提取的字符串是: "***粗 斜 字 体***"
-
-    // 1. 获取关键字"粗 斜 字 体"
-    String keyStr = src.substring(start + 3, end - 3);
-
-    // 2. 设置关键字的叠加样式
-    CSS boldCSS = CSS.copyFrom(css);
-    boldCSS.isItalic = true;
-    boldCSS.isBold = true;
-
-    return TextSpan(
-      children: [
-        Analyser(
-          text: src.substring(0, start),
-          css: css,
-        ).parseTextSpan(context),
-        Analyser(
-          text: keyStr,
-          css: boldCSS,
-        ).parseTextSpan(context),
-        Analyser(
-          text: src.substring(end, src.length),
-          css: css,
-        ).parseTextSpan(context),
-      ],
-    );
-  }
-}
-
 class CodeBlock extends Renderer {
   final String src;
   final int start;
