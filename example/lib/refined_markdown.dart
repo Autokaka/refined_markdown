@@ -6,3 +6,4 @@ export './src/launch.dart';
 export './src/markdown.dart';
 export './src/renderer.dart';
 export './src/support.dart';
+export './src/color.dart';

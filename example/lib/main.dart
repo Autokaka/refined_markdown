@@ -178,9 +178,26 @@ string_3: bar
   **[百度加粗](https://www.baidu.com)**
       [**百度加粗**](https://www.baidu.com)
 - [链接](https://www.baidu.com)普通文字
+[随意的标记] 普通文字[链接](https://pub.dev/packages/refined_markdown)
 
 
-右侧图片![图片](http://via.placeholder.com/350x150)
+在线图片![图片](https://dss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3702648800,3967102116&fm=26&gp=0.jpg)
+离线图片![图片](./test.jpg)
+
+
+分割线
+----
+不解析的分割线 ----
+----不解析的分割线
+
+
+~~删除线~~普通文字~~删除线~~普通文字**加粗文字***斜体****加粗斜体***==文字高亮==
+  ====不解析高亮
+
+<font color=red size=20>红色文字, 大小20</font>
+<font color=red size=11>红色文字, 大小11</font>普通文字<font color=red size=20>红色文字, 大小5</font>**加粗文字**
+<font color=red size=11>红色文字, 大小11</font>普通文字**加粗文字***倾斜文字**倾斜文字*普通文字~~删除线~~==语法高亮==<br/><font color=red size=20>红色文字, 大小5</font>
+换行符<br/>换行符
 
 """,
         css: baseCSS,

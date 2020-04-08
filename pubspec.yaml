@@ -1,6 +1,6 @@
 name: refined_markdown
 description: A simple Markdown renderer that is written mostly in dart (grammar analysing and rendering part). Simple, quiet, fast, that is all refined markdown is intended to be.
-version: 1.1.0
+version: 1.2.0
 homepage: https://github.com/Autokaka/refined_markdown
 
 environment:
@@ -12,7 +12,7 @@ dependencies:
   flutter_highlight: ^0.6.0
   highlight: ^0.6.0
   url_launcher: ^5.4.2
-  extended_text: ^0.7.1
+  cached_network_image: ^2.0.0
 
 dev_dependencies:
   flutter_test:

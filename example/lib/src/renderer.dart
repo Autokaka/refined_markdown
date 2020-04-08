@@ -1,4 +1,4 @@
-import 'package:extended_text/extended_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_highlight/themes/github.dart';
@@ -7,6 +7,7 @@ import 'package:highlight/highlight.dart' show highlight, Node;
 import './launch.dart';
 import './analyser.dart';
 import './css.dart';
+import './color.dart';
 
 abstract class Renderer {
   final String src;
@@ -309,6 +310,51 @@ class BoldText extends Renderer {
   }
 }
 
+class BoldItalicText extends Renderer {
+  final String src;
+  final int start;
+  final int end;
+  final CSS css;
+
+  const BoldItalicText({
+    Key key,
+    @required this.src,
+    @required this.start,
+    @required this.end,
+    @required this.css,
+  }) : super(src: src, start: start, end: end, css: css);
+
+  @override
+  InlineSpan build(BuildContext context) {
+    // 假设提取的字符串是: "**加 粗 字 体**"
+
+    // 1. 获取关键字"加 粗 字 体"
+    String keyStr = src.substring(start + 3, end - 3);
+
+    // 2. 设置关键字的叠加样式
+    CSS boldItalicCSS = CSS.copyFrom(css);
+    boldItalicCSS.isBold = true;
+    boldItalicCSS.isItalic = true;
+
+    return TextSpan(
+      children: [
+        Analyser(
+          text: src.substring(0, start),
+          css: css,
+        ).parseTextSpan(context),
+        Analyser(
+          text: keyStr,
+          css: boldItalicCSS,
+        ).parseTextSpan(context),
+        Analyser(
+          text: src.substring(end, src.length),
+          css: css,
+        ).parseTextSpan(context),
+      ],
+    );
+  }
+}
+
 class ItalicText extends Renderer {
   final String src;
   final int start;
@@ -481,16 +527,18 @@ class CodeSegment extends Renderer {
           text: src.substring(0, start),
           css: css,
         ).parseTextSpan(context),
+        TextSpan(
+          text: " ",
+          style: codeSegCSS.castStyle(),
+        ),
         Analyser(
           text: keyStr,
           css: codeSegCSS,
-          inheritedWidgetBuilder: (text) {
-            return TextSpan(
-              text: " " + text + " ",
-              style: codeSegCSS.castStyle(),
-            );
-          },
         ).parseTextSpan(context),
+        TextSpan(
+          text: " ",
+          style: codeSegCSS.castStyle(),
+        ),
         Analyser(
           text: src.substring(end, src.length),
           css: css,
@@ -693,11 +741,263 @@ class MDImage extends Renderer {
           text: src.substring(0, start),
           css: css,
         ).parseTextSpan(context),
-        ImageSpan(
-          NetworkImage(addr),
-          imageWidth: 200,
-          imageHeight: 200,
-          fit: BoxFit.cover,
+        WidgetSpan(
+          child: Column(
+            children: [
+              Text("", style: css.castStyle()),
+              GestureDetector(
+                child: CachedNetworkImage(
+                  imageUrl: addr,
+                  placeholder: (context, url) => Icon(Icons.arrow_downward),
+                  errorWidget: (context, url, error) =>
+                      Text("Error: $error\nCannot fetch resource from $url\n"),
+                ),
+                onTap: () async {
+                  await Launch.getInstance().url(addr);
+                },
+              ),
+            ],
+          ),
+        ),
+        Analyser(
+          text: src.substring(end, src.length),
+          css: css,
+        ).parseTextSpan(context),
+      ],
+    );
+  }
+}
+
+class MDDivider extends Renderer {
+  final String src;
+  final int start;
+  final int end;
+  final CSS css;
+
+  const MDDivider({
+    Key key,
+    @required this.src,
+    @required this.start,
+    @required this.end,
+    @required this.css,
+  }) : super(src: src, start: start, end: end, css: css);
+
+  @override
+  InlineSpan build(BuildContext context) {
+    // 假设提取的字符串是: "\n   ---   "
+
+    return TextSpan(
+      children: [
+        Analyser(
+          text: src.substring(0, start),
+          css: css,
+        ).parseTextSpan(context),
+        WidgetSpan(
+          child: Divider(
+            thickness: 1,
+            indent: 5,
+            endIndent: 5,
+          ),
+        ),
+        Analyser(
+          text: src.substring(end, src.length),
+          css: css,
+        ).parseTextSpan(context),
+      ],
+    );
+  }
+}
+
+class DelLine extends Renderer {
+  final String src;
+  final int start;
+  final int end;
+  final CSS css;
+
+  const DelLine({
+    Key key,
+    @required this.src,
+    @required this.start,
+    @required this.end,
+    @required this.css,
+  }) : super(src: src, start: start, end: end, css: css);
+
+  @override
+  InlineSpan build(BuildContext context) {
+    // 假设提取的字符串是: "~~删除线~~"
+
+    // 1. 获取关键字"删除线"
+    String keyStr = src.substring(start + 2, end - 2);
+
+    // 2. 设置关键字的叠加样式
+    CSS delCSS = CSS.copyFrom(css);
+    delCSS.deleted = true;
+
+    return TextSpan(
+      children: [
+        Analyser(
+          text: src.substring(0, start),
+          css: css,
+        ).parseTextSpan(context),
+        Analyser(
+          text: keyStr,
+          css: delCSS,
+        ).parseTextSpan(context),
+        Analyser(
+          text: src.substring(end, src.length),
+          css: css,
+        ).parseTextSpan(context),
+      ],
+    );
+  }
+}
+
+class HighlightText extends Renderer {
+  final String src;
+  final int start;
+  final int end;
+  final CSS css;
+
+  const HighlightText({
+    Key key,
+    @required this.src,
+    @required this.start,
+    @required this.end,
+    @required this.css,
+  }) : super(src: src, start: start, end: end, css: css);
+
+  @override
+  InlineSpan build(BuildContext context) {
+    // 假设提取的字符串是: "==高亮文字=="
+
+    // 1. 获取关键字"高亮文字"
+    String keyStr = src.substring(start + 2, end - 2);
+
+    // 2. 设置关键字的叠加样式
+    CSS highlightCSS = CSS.copyFrom(css);
+    highlightCSS.backgroundColor = Colors.yellow;
+
+    return TextSpan(
+      children: [
+        Analyser(
+          text: src.substring(0, start),
+          css: css,
+        ).parseTextSpan(context),
+        Analyser(
+          text: keyStr,
+          css: highlightCSS,
+        ).parseTextSpan(context),
+        Analyser(
+          text: src.substring(end, src.length),
+          css: css,
+        ).parseTextSpan(context),
+      ],
+    );
+  }
+}
+
+class StyledText extends Renderer {
+  final String src;
+  final int start;
+  final int end;
+  final CSS css;
+
+  const StyledText({
+    Key key,
+    @required this.src,
+    @required this.start,
+    @required this.end,
+    @required this.css,
+  }) : super(src: src, start: start, end: end, css: css);
+
+  @override
+  InlineSpan build(BuildContext context) {
+    // 假设提取的字符串是: "<font color=red size=12>红色文字, 大小12, 字体常规</font>普通文字<font color=red size=12>红色文字, 大小12, 字体常规</font>"
+
+    // 1. 找到真正的结尾
+    int realEnd = end;
+    RegExp endExp = RegExp(r"<\/font>");
+    var endMatch = endExp.firstMatch(src.substring(start, end));
+    realEnd = start + endMatch.end;
+
+    // 2. 获取"红色文字, 大小12, 字体常规"
+    RegExp keyReg = RegExp(r">.+<");
+    var keyMatch = keyReg.firstMatch(src.substring(start, realEnd));
+    String keyStr =
+        src.substring(start + keyMatch.start + 1, start + keyMatch.end - 1);
+
+    // 3. 获取关键字"color"的内容
+    RegExp colorReg = RegExp(r"color=[^ \n>]+ *");
+    var colorMatch = colorReg.firstMatch(src.substring(start, realEnd));
+    String colorStr =
+        src.substring(start + colorMatch.start + 6, start + colorMatch.end);
+    colorStr = colorStr.replaceAll("\"", "").trim();
+
+    // 4. 获取关键字"size"的内容
+    RegExp sizeReg = RegExp(r"size=[^ \n>]+ *");
+    var sizeMatch = sizeReg.firstMatch(src.substring(start, realEnd));
+    String sizeStr =
+        src.substring(start + sizeMatch.start + 5, start + sizeMatch.end);
+
+    // 5. 设置关键字的叠加样式
+    CSS styledCSS = CSS.copyFrom(css);
+    styledCSS.fontColor = SmartColor.getInstance().fromString(colorStr);
+    if (colorStr != "transparent" &&
+        styledCSS.fontColor == Colors.transparent) {
+      try {
+        styledCSS.fontColor = Color(int.parse(colorStr));
+      } catch (e) {
+        styledCSS.fontColor = css.fontColor;
+      }
+    }
+    styledCSS.fontSize = double.parse(sizeStr);
+
+    return TextSpan(
+      children: [
+        Analyser(
+          text: src.substring(0, start),
+          css: css,
+        ).parseTextSpan(context),
+        Analyser(
+          text: keyStr,
+          css: styledCSS,
+        ).parseTextSpan(context),
+        Analyser(
+          text: src.substring(realEnd, src.length),
+          css: css,
+        ).parseTextSpan(context),
+      ],
+    );
+  }
+}
+
+class BreakRow extends Renderer {
+  final String src;
+  final int start;
+  final int end;
+  final CSS css;
+
+  const BreakRow({
+    Key key,
+    @required this.src,
+    @required this.start,
+    @required this.end,
+    @required this.css,
+  }) : super(src: src, start: start, end: end, css: css);
+
+  @override
+  InlineSpan build(BuildContext context) {
+    // 假设提取的字符串是: "<br    />"
+
+    return TextSpan(
+      children: [
+        Analyser(
+          text: src.substring(0, start),
+          css: css,
+        ).parseTextSpan(context),
+        TextSpan(
+          text: "\n",
+          style: css.castStyle(),
         ),
         Analyser(
           text: src.substring(end, src.length),

@@ -1,3 +1,27 @@
+## 1.2.0
+
+### Add
+
+1. Minimal text style support using html grammar.
+2. New picture rendering (**online picture only! I will not support using local pictures because this might be quite complex and involves quite a lot of native adaptations**)
+3. Deleted text rendering
+4. Highlighted text rendering
+5. Divider rendering
+
+### Fix
+
+1. Link rendering fault when mixed with normal text
+
+### Optimize
+
+1. Bold text and etalic text displaying
+
+### Notice
+
+1. This is the very stable version that has lived up to my expectation right now, if there are any rendering fault, feel free to give an Issue or a PR, that will help a lot.
+2. I’m working on rendering tables, this might be a hard process, I need more time.
+3. Due to my laziness, if you have any ideas about how to render local pictures, feel free to contact me, thank you very much!
+
 ## 1.1.0
 
 ### Optimize
@@ -57,31 +81,29 @@ First commit.
 
 Now support rendering the following grammar. Some of them may not work as you wish, I am trying my best to optimize it, please be patient.
 
-- normal text
+- Normal text
 
-- **bold text**
+- Bold text
 
-- _Italic text_
+- Italic text
 
-- <font color="orange">Syntax highlight</font>
+- Syntax highlight
 
-- `code segment`
+- code segment
 
-- ```dart
-  // code blocks(including highlighting, using flutter_highlight. Thanks to pd4d10!)
-  ```
-
+- Code blocks(including highlighting, using flutter_highlight. Thanks to pd4d10!)
+  
 - ##### headers
 
-- normal list
+- Normal list
 
-- [links](https://www.baidu.com)
+- Links
 
-- photos![photos](https://via.placeholder.com/150x150)(Using extended_text. Thanks to team [fluttercandies](https://github.com/fluttercandies).)
+- Pictures
 
-1. sequence list
+- Sequence list
 
-- [x] task list
+- Task list
 
 ### What is next?
 
