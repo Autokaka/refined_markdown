@@ -15,7 +15,7 @@ class RefinedMarkdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String processedText = ("\n" + text).replaceAll('\n\n', '\n');
+    String processedText = ("\n" + text).replaceAll(RegExp(r"\n *\n"), "\n");
     return SingleChildScrollView(
       child: Text.rich(
         Analyser(

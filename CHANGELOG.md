@@ -1,3 +1,10 @@
+## 1.2.1
+
+### Fix
+
+1. Rendering fault when there exists “\n *\n”;
+2. Styled text rendering fault when some of the font features are not defined 
+
 ## 1.2.0
 
 ### Add
@@ -92,7 +99,7 @@ Now support rendering the following grammar. Some of them may not work as you wi
 - code segment
 
 - Code blocks(including highlighting, using flutter_highlight. Thanks to pd4d10!)
-  
+
 - ##### headers
 
 - Normal list

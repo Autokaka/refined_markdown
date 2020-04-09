@@ -929,28 +929,38 @@ class StyledText extends Renderer {
     // 3. 获取关键字"color"的内容
     RegExp colorReg = RegExp(r"color=[^ \n>]+ *");
     var colorMatch = colorReg.firstMatch(src.substring(start, realEnd));
-    String colorStr =
-        src.substring(start + colorMatch.start + 6, start + colorMatch.end);
-    colorStr = colorStr.replaceAll("\"", "").trim();
+    String colorStr;
+    if (colorMatch != null) {
+      colorStr =
+          src.substring(start + colorMatch.start + 6, start + colorMatch.end);
+      colorStr = colorStr.replaceAll("\"", "").trim();
+    }
 
     // 4. 获取关键字"size"的内容
     RegExp sizeReg = RegExp(r"size=[^ \n>]+ *");
     var sizeMatch = sizeReg.firstMatch(src.substring(start, realEnd));
-    String sizeStr =
-        src.substring(start + sizeMatch.start + 5, start + sizeMatch.end);
+    String sizeStr;
+    if (sizeMatch != null) {
+      sizeStr =
+          src.substring(start + sizeMatch.start + 5, start + sizeMatch.end);
+    }
 
     // 5. 设置关键字的叠加样式
     CSS styledCSS = CSS.copyFrom(css);
-    styledCSS.fontColor = SmartColor.getInstance().fromString(colorStr);
-    if (colorStr != "transparent" &&
-        styledCSS.fontColor == Colors.transparent) {
-      try {
-        styledCSS.fontColor = Color(int.parse(colorStr));
-      } catch (e) {
-        styledCSS.fontColor = css.fontColor;
+    if (colorStr != null) {
+      styledCSS.fontColor = SmartColor.getInstance().fromString(colorStr);
+      if (colorStr != "transparent" &&
+          styledCSS.fontColor == Colors.transparent) {
+        try {
+          styledCSS.fontColor = Color(int.parse(colorStr));
+        } catch (e) {
+          styledCSS.fontColor = css.fontColor;
+        }
       }
     }
-    styledCSS.fontSize = double.parse(sizeStr);
+    if (sizeStr != null) {
+      styledCSS.fontSize = double.parse(sizeStr);
+    }
 
     return TextSpan(
       children: [
