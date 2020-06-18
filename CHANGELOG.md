@@ -1,9 +1,19 @@
+## 1.2.2
+
+### Add
+
+More detailed documentation.
+
+### Modify
+
+Revised exmple code.
+
 ## 1.2.1
 
 ### Fix
 
-1. Rendering fault when there exists “\n *\n”;
-2. Styled text rendering fault when some of the font features are not defined 
+1. Rendering fault when there exists “\n \*\n”;
+2. Styled text rendering fault when some of the font features are not defined
 
 ## 1.2.0
 

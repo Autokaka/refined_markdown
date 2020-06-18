@@ -1,10 +1,10 @@
 # Refined Markdown
 
-[![pub-mirror-cn](https://img.shields.io/badge/dynamic/json?color=blue&label=pub-mirror-cn&query=latestStableVersion&url=https%3A%2F%2Fdart-pub.mirrors.sjtug.sjtu.edu.cn%2Fapi%2Fdocumentation%2Frefined_markdown)](https://dart-pub.mirrors.sjtug.sjtu.edu.cn/packages/refined_markdown) [![pub](https://img.shields.io/badge/dynamic/json?color=blue&label=pub&query=latestStableVersion&url=https%3A%2F%2Fpub.dartlang.org%2Fapi%2Fdocumentation%2Frefined_markdown)](https://pub.dartlang.org/packages/refined_markdown) ![travis](https://travis-ci.org/Autokaka/refined_markdown.svg?branch=master)
+[![pub](https://img.shields.io/badge/dynamic/json?color=blue&label=pub&query=latestStableVersion&url=https%3A%2F%2Fpub.dartlang.org%2Fapi%2Fdocumentation%2Frefined_markdown)](https://pub.dartlang.org/packages/refined_markdown) ![travis](https://travis-ci.org/Autokaka/refined_markdown.svg?branch=master)
 
 ## What is it?
 
-A simple Markdown renderer that is written mostly in dart (grammar analysing and rendering part).
+A **simple** Markdown renderer (for now) that is written mostly in dart (grammar analysing and rendering part).
 
 ## Demo preview
 
@@ -17,11 +17,9 @@ Using RefinedMarkdown is simple. What you need to do is generally like this:
 ```dart
 // main.dart
 import 'package:flutter/material.dart';
-// import 'package:flutter/rendering.dart';
 import 'package:refined_markdown/refined_markdown.dart';
 
 void main() {
-  // debugPaintSizeEnabled = true;
   runApp(MyApp());
 }
 
@@ -48,8 +46,6 @@ class MarkdownPage extends StatefulWidget {
 }
 
 class _MarkdownPageState extends State<MarkdownPage> {
-  String filePath = 'assets/markdown.html';
-
   @override
   Widget build(BuildContext context) {
     CSS baseCSS = CSS();
@@ -57,7 +53,7 @@ class _MarkdownPageState extends State<MarkdownPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text('Markdown测试'),
+        title: Text('Markdown Test'),
       ),
       body: RefinedMarkdown(
         text: r"""
@@ -80,7 +76,7 @@ class _MarkdownPageState extends State<MarkdownPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        title: Text('Markdown测试'),
+        title: Text('Markdown Test'),
       ),
       body: RefinedMarkdown(
         text: r"""
@@ -91,6 +87,10 @@ class _MarkdownPageState extends State<MarkdownPage> {
     );
   }
 ```
+
+## What are supported now?
+
+taml, code block, code segmentation, task list, normal list, sequence list, title, bold text, italic text, delete line, text highlight, text style, network photo, link, divider
 
 ## What are the meanings of those params?
 
@@ -112,3 +112,13 @@ class _MarkdownPageState extends State<MarkdownPage> {
 | isBold          | bool  | false              | Whether the text is displayed in italic style | no          |
 | deleted         | bool  | false              | Whether the text is shown with line-through   | no          |
 | underline       | bool  | false              | Whether to show an underline                  | no          |
+
+## Using packages
+
+- [cached_network_image](https://pub.flutter-io.cn/packages/cached_network_image) for network images
+- [highlight](https://pub.flutter-io.cn/packages/highlight) for code blocks highlight
+- [url_launcher](https://pub.flutter-io.cn/packages/url_launcher) for launching links
+
+## What’s more
+
+This package is using its own way to transfer markdown string to flutter widget without using any html/markdown packages for the base. It still get long way to go. More markdown standards will be supported in later version of refined_markdown in the following versions this summer :) 
